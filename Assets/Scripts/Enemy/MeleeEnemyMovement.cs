@@ -6,27 +6,25 @@ using UnityEngine.AI;
 public class MeleeEnemyMovement : MonoBehaviour {
     GameObject player;
     NavMeshAgent nav;
-    //EnemyHealth enemyHealth;
-    //PlayerHealth playerHealth;
     bool playerInRange;
+    float lookSpeed = 10f;
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
-        //enemyhealth = GetComponent<EnemyHealth>();
-        //playerHealth = GetComponent<playerHealth>();
+        nav.updateRotation = false;
     }
 
     private void Update() {
-        //if(enemyHealth > 0 && playerHealth > 0) {
-        if (playerInRange) {
-            nav.isStopped = true;
-        } else {
-            nav.isStopped = false;
-            nav.SetDestination(player.transform.position);
-        } //else
-        //  nav.enabled = false;
-        //}
+        nav.SetDestination(player.transform.position);
+    }
+
+    private void LateUpdate() {
+        if (nav.velocity.sqrMagnitude > Mathf.Epsilon) {
+            Quaternion look = Quaternion.LookRotation(nav.velocity.normalized);
+            look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
+            transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
