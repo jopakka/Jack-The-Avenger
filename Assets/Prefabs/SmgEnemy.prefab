@@ -168,6 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c312f64a562140a408479d1614c37c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clipSize: 30
+  timeBetweenShots: 0.2
+  reloadTime: 3
+  damage: 3
+  hitChange: 65
 --- !u!1 &5418223261722822636
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class EnemyShooting : MonoBehaviour {
 
@@ -14,6 +15,9 @@ public class EnemyShooting : MonoBehaviour {
     float reloadTime = 3f;
     [SerializeField]
     int damage = 3;
+    [SerializeField]
+    [Range(0f, 100f)]
+    float hitChange = 65f;
     float shootTimer = 0f;
     int ammo;
 
@@ -30,7 +34,7 @@ public class EnemyShooting : MonoBehaviour {
         shootTimer += Time.deltaTime;
 
         if (ammo > 0 && shootTimer >= timeBetweenShots && movement.GetPlayerInRange()) {
-            ShootPlayer();
+            Shoot();
         }
 
         if (ammo <= 0 && shootTimer >= reloadTime) {
@@ -38,11 +42,19 @@ public class EnemyShooting : MonoBehaviour {
         }
     }
 
-    private void ShootPlayer() {
+    private void Shoot() {
         shootTimer = 0f;
-        Debug.Log(this.name + " shoots player");
         ammo--;
+        Debug.Log(this.name + " shoots");
+
+        if (Random.Range(0f, 100f) <= hitChange) {
+            DamagePlayer();
+        }
 
         if (ammo <= 0) Debug.Log(this.name + " reload gun");
+    }
+
+    private void DamagePlayer() {
+        Debug.Log(this.name + " hits player");
     }
 }
