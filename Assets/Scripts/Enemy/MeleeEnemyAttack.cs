@@ -8,30 +8,19 @@ public class MeleeEnemyAttack : MonoBehaviour{
     [SerializeField]
     int attackDamage = 10;
 
-    GameObject player;
-    bool playerInRange;
     float timer;
+    MeleeEnemyMovement movement;
+    GameObject player;
 
     private void Awake() {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject == player) {
-            playerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if(other.gameObject == player) {
-            playerInRange = false;
-        }
+        movement = GetComponent<MeleeEnemyMovement>();
+        player = movement.GetPlayer();
     }
 
     private void Update() {
         timer += Time.deltaTime;
 
-        if(timer >= timeBetweenAttacks && playerInRange) {
+        if (timer >= timeBetweenAttacks && movement.GetPlayerInRange()) {
             Attack();
         }
     }

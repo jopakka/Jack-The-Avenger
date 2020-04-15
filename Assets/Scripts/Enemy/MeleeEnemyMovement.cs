@@ -3,39 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemyMovement : MonoBehaviour {
-    GameObject player;
-    NavMeshAgent nav;
-    bool playerInRange;
-    float lookSpeed = 10f;
-
-    private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
-        nav = GetComponent<NavMeshAgent>();
-        nav.updateRotation = false;
-    }
+public class MeleeEnemyMovement : EnemyMovement {
 
     private void Update() {
-        nav.SetDestination(player.transform.position);
+        base.SetDestination(base.GetPlayer().transform.position);
     }
 
     private void LateUpdate() {
-        if (nav.velocity.sqrMagnitude > Mathf.Epsilon) {
-            Quaternion look = Quaternion.LookRotation(nav.velocity.normalized);
-            look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
-            transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
+        if (base.GetNavMeshAgent().velocity.sqrMagnitude > Mathf.Epsilon) {
+            base.LookForward();
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject == player) {
-            playerInRange = true;
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject == base.GetPlayer()) {
+            base.SetPlayerInRange(true);
+            base.GetNavMeshAgent().isStopped = true;
+            base.LookPlayer();
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (other.gameObject == player) {
-            playerInRange = false;
+        if (other.gameObject == base.GetPlayer()) {
+            base.SetPlayerInRange(false);
+            base.GetNavMeshAgent().isStopped = false;
         }
     }
 }

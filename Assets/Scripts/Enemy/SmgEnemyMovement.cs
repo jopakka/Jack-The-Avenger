@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SmgEnemyMovement : MonoBehaviour {
+public class SmgEnemyMovement : EnemyMovement {
 
     #region Detector variables
 
+    [Header("Player Detector")]
     [SerializeField]
     float detectorRange = 5f;
     [SerializeField]
     [Range(0f, 360f)]
     float fieldOfView = 40f;
+    GameObject detector;
 
     #endregion
 
@@ -29,56 +31,45 @@ public class SmgEnemyMovement : MonoBehaviour {
 
     #endregion
 
-    NavMeshAgent nav;
-    GameObject player;
-    GameObject detector;
-    float lookSpeed = 10f;
-    bool playerInRange;
-
-    private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
-        nav = GetComponent<NavMeshAgent>();
-        nav.updateRotation = false;
+    protected override void Start() {
+        base.Start();
         detector = transform.Find("Detector").gameObject;
         detector.GetComponent<SphereCollider>().radius = detectorRange;
-        detector.GetComponent<Detector>().SetFieldOfView(fieldOfView);
+        detector.GetComponent<EnemyDetector>().SetFieldOfView(fieldOfView);
     }
 
     private void Update() {
-        if (enablePatrol && waypoints.Count != 0) {
-            nav.isStopped = false;
-            if (nav.remainingDistance <= 0.5f) {
-                nav.SetDestination(waypoints[currentWaypointIndex].transform.position);
-
+        if (base.GetFindPlayer()) {
+            base.GoToPlayersLastKnowLocation();
+            if(base.GetNavMeshAgent().remainingDistance < 0.5f) {
+                base.SetFindPlayer(false);
+                base.GoToOldDestination();
+            }
+        } else if (enablePatrol && waypoints.Count != 0) {
+            base.GetNavMeshAgent().isStopped = false;
+            if (base.GetNavMeshAgent().remainingDistance <= 0.5f) {
+                base.GetNavMeshAgent().SetDestination(waypoints[currentWaypointIndex].transform.position);
                 NextWaypoint();
             }
         } else {
-            nav.isStopped = true;
+            base.GetNavMeshAgent().isStopped = true;
         }
     }
 
     private void LateUpdate() {
-        if (playerInRange) {
-            nav.isStopped = true;
-            Quaternion look = Quaternion.LookRotation(player.transform.position - transform.position);
-            look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
-            transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
+        if (base.GetPlayerInRange()) {
+            base.GetNavMeshAgent().isStopped = true;
+            base.LookPlayer();
         } else {
-            nav.isStopped = false;
-            if (nav.velocity.sqrMagnitude > Mathf.Epsilon) {
-                Quaternion look = Quaternion.LookRotation(nav.velocity.normalized);
-                look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
-                transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
-            }
+            base.GetNavMeshAgent().isStopped = false;
+            if (base.GetNavMeshAgent().velocity.sqrMagnitude > Mathf.Epsilon) base.LookForward();
         }
     }
 
     private void NextWaypoint() {
-        if (travelBack) {
+        if (travelBack && waypoints.Count > 2) {
             if (isTravelingBack) {
-                if (--currentWaypointIndex == 0) {
-                    isTravelingBack = false;
-                }
+                if (--currentWaypointIndex == 0) isTravelingBack = false;
             } else {
                 if (++currentWaypointIndex == waypoints.Count) {
                     currentWaypointIndex -= 2;
@@ -86,13 +77,7 @@ public class SmgEnemyMovement : MonoBehaviour {
                 }
             }
         } else {
-            if (++currentWaypointIndex == waypoints.Count) {
-                currentWaypointIndex = 0;
-            }
+            if (++currentWaypointIndex == waypoints.Count) currentWaypointIndex = 0;
         }
-    }
-
-    public void SetPlayerInRange(bool value) {
-        playerInRange = value;
     }
 }

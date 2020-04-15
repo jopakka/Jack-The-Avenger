@@ -100,11 +100,11 @@ GameObject:
   - component: {fileID: 836408786337877478}
   - component: {fileID: 6388088028294066463}
   - component: {fileID: 1334819975109009079}
+  - component: {fileID: 602768828}
+  - component: {fileID: 1552530826856557416}
+  - component: {fileID: 602768827}
   - component: {fileID: 3338179896313929599}
   - component: {fileID: 2606202327518962139}
-  - component: {fileID: 602768828}
-  - component: {fileID: 602768827}
-  - component: {fileID: 1552530826856557416}
   m_Layer: 9
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -197,6 +197,49 @@ NavMeshAgent:
   m_BaseOffset: 0.811215
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &602768828
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655554590747821507}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &1552530826856557416
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655554590747821507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: -0.00000020861626, y: 0, z: 0}
+--- !u!65 &602768827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655554590747821507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1131952, y: 1.7845061, z: 0.88336325}
+  m_Center: {x: -0.008002688, y: -0.07148439, z: 0.28418684}
 --- !u!114 &3338179896313929599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,48 +264,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992b36833fd29244ea3c215f6d2a0698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 1
   attackDamage: 10
---- !u!54 &602768828
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4655554590747821507}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!65 &602768827
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4655554590747821507}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1131952, y: 1.7845061, z: 0.88336325}
-  m_Center: {x: -0.008002688, y: -0.07148439, z: 0.28418684}
---- !u!136 &1552530826856557416
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4655554590747821507}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: -0.00000020861626, y: 0, z: 0}
