@@ -16,6 +16,8 @@ public class MeleeEnemyMovement : EnemyMovement {
     }
 
     private void OnTriggerStay(Collider other) {
+        // When player enters trigger zone sets playerInRange to TRUE
+        // and starts to look at player
         if (other.gameObject == base.GetPlayer()) {
             base.SetPlayerInRange(true);
             base.GetNavMeshAgent().isStopped = true;
@@ -24,6 +26,7 @@ public class MeleeEnemyMovement : EnemyMovement {
     }
 
     private void OnTriggerExit(Collider other) {
+        // Player exit to trigger zone
         if (other.gameObject == base.GetPlayer()) {
             base.SetPlayerInRange(false);
             base.GetNavMeshAgent().isStopped = false;

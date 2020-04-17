@@ -155,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 2197520304821708229, guid: 40c363face5faa446856be999f0ffb47,
         type: 3}
       propertyPath: m_Name
-      value: SmgEnemy
+      value: PatrolEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 2197520304821708229, guid: 40c363face5faa446856be999f0ffb47,
         type: 3}
@@ -497,7 +497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514638919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 1.0874106, z: -1.78}
+  m_LocalPosition: {x: -0.08, y: 1.0874106, z: -2.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -699,6 +699,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3338179896313929599, guid: 48a3bb2754b967749948fe9c671ade79,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4655554590747821507, guid: 48a3bb2754b967749948fe9c671ade79,
         type: 3}
       propertyPath: m_Name
@@ -956,7 +961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004754851}
   m_Layer: 0
-  m_Name: SmgEnemyWaypoints
+  m_Name: PatrolEnemyWaypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -998,6 +1003,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waypoint
       objectReference: {fileID: 0}
+    - target: {fileID: 6178293978452306846, guid: ff7c0cd180e00a647b7b7e3f67d64298,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 8889027223210071765, guid: ff7c0cd180e00a647b7b7e3f67d64298,
         type: 3}
       propertyPath: m_LocalPosition.x

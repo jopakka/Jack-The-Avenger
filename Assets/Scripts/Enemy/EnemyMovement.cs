@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour {
+
+    #region Variables
+
     GameObject player;
     NavMeshAgent nav;
     bool playerInRange;
@@ -12,18 +15,22 @@ public class EnemyMovement : MonoBehaviour {
     Vector3 oldDestination;
     bool findPlayer;
 
+    #endregion
+
     protected virtual void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         nav = GetComponent<NavMeshAgent>();
         nav.updateRotation = false;
     }
 
+    // Sets rotation to forward
     protected virtual void LookForward() {
         Quaternion look = Quaternion.LookRotation(nav.velocity.normalized);
         look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
         transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
     }
 
+    // Sets rotation to player position
     protected virtual void LookPlayer() {
         Quaternion look = Quaternion.LookRotation(player.transform.position - transform.position);
         look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
@@ -33,12 +40,14 @@ public class EnemyMovement : MonoBehaviour {
         findPlayer = true;
     }
 
+    // Sets new destination to players last known location
     protected virtual void GoToPlayersLastKnowLocation() {
         if(!playerInRange && findPlayer) {
             SetDestination(playerLastKnownLocation);
         }
     }
 
+    // Sets destination back to where enemy left
     protected virtual void GoToOldDestination() {
         SetDestination(oldDestination);
     }

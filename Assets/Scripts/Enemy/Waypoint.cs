@@ -5,6 +5,7 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour{
     float gizmoRadius = 3f;
 
+    // Draw gizmos to editor window
     private void OnDrawGizmos() {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, gizmoRadius / 10f);
