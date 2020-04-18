@@ -7,87 +7,79 @@ public class EnemyMovement : MonoBehaviour {
 
     #region Variables
 
-    GameObject player;
-    NavMeshAgent nav;
-    bool playerInRange;
-    float lookSpeed = 10f;
-    Vector3 playerLastKnownLocation;
-    Vector3 oldDestination;
-    bool findPlayer;
+    GameObject _player;
+    NavMeshAgent _nav;
+    bool _playerInRange;
+    float _lookSpeed = 10f;
+    Vector3 _playerLastKnownLocation;
+    Vector3 _oldDestination;
+    bool _findPlayer;
 
     #endregion
 
     protected virtual void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
-        nav = GetComponent<NavMeshAgent>();
-        nav.updateRotation = false;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _nav = GetComponent<NavMeshAgent>();
+        _nav.updateRotation = false;
     }
 
     // Sets rotation to forward
     protected virtual void LookForward() {
-        Quaternion look = Quaternion.LookRotation(nav.velocity.normalized);
+        Quaternion look = Quaternion.LookRotation(_nav.velocity.normalized);
         look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
-        transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, look, _lookSpeed * Time.deltaTime);
     }
 
     // Sets rotation to player position
     protected virtual void LookPlayer() {
-        Quaternion look = Quaternion.LookRotation(player.transform.position - transform.position);
+        Quaternion look = Quaternion.LookRotation(_player.transform.position - transform.position);
         look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
-        transform.rotation = Quaternion.Slerp(transform.rotation, look, lookSpeed * Time.deltaTime);
-        playerLastKnownLocation = player.transform.position;
-        if(!findPlayer) oldDestination = nav.destination;
-        findPlayer = true;
+        transform.rotation = Quaternion.Slerp(transform.rotation, look, _lookSpeed * Time.deltaTime);
+        _playerLastKnownLocation = _player.transform.position;
+        if(!_findPlayer) _oldDestination = _nav.destination;
+        _findPlayer = true;
     }
 
     // Sets new destination to players last known location
     protected virtual void GoToPlayersLastKnowLocation() {
-        if(!playerInRange && findPlayer) {
-            SetDestination(playerLastKnownLocation);
+        if(!_playerInRange && _findPlayer) {
+            destination = _playerLastKnownLocation;
         }
     }
 
     // Sets destination back to where enemy left
     protected virtual void GoToOldDestination() {
-        SetDestination(oldDestination);
+        destination = _oldDestination;
     }
 
-    #region Getters
 
-    public virtual bool GetPlayerInRange() {
-        return playerInRange;
+    #region Getters Setters
+
+    public virtual bool playerInRange {
+        get { return _playerInRange; }
+        set { _playerInRange = value; }
     }
 
-    public virtual GameObject GetPlayer() {
-        return player;
+    public virtual GameObject player {
+        get { return _player; }
     }
 
-    public virtual NavMeshAgent GetNavMeshAgent() {
-        return nav;
+    public virtual NavMeshAgent navMeshAgent {
+        get { return _nav; }
     }
 
-    public virtual Vector3 GetPlayerLastKnownLocation() {
-        return playerLastKnownLocation;
+    public virtual Vector3 playerLastKnownLocation {
+        get { return _playerLastKnownLocation; }
     }
 
-    public virtual bool GetFindPlayer() {
-        return findPlayer;
+    public virtual bool findPlayer {
+        get { return _findPlayer; }
+        set { _findPlayer = value; }
     }
 
-    #endregion
-
-    #region Setters
-
-    public virtual void SetPlayerInRange(bool value) {
-        playerInRange = value;
-    }
-
-    protected virtual void SetDestination(Vector3 destination) {
-        nav.SetDestination(destination);
-    }
-
-    public virtual void SetFindPlayer(bool value) {
-        findPlayer = value;
+    public virtual Vector3 destination {
+        get { return _nav.destination; }
+        protected set { _nav.SetDestination(value); }
     }
 
     #endregion

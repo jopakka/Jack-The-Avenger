@@ -7,12 +7,12 @@ public class MeleeEnemyAttack : MonoBehaviour{
     #region Attack variables
 
     [SerializeField]
-    float timeBetweenAttacks = 0.5f;
+    float _timeBetweenAttacks = 0.5f;
     [SerializeField]
-    int attackDamage = 10;
+    int _attackDamage = 10;
     [SerializeField]
     [Range(0f, 100f)]
-    float hitChange = 90f;
+    float _hitChange = 90f;
 
     #endregion
 
@@ -26,7 +26,7 @@ public class MeleeEnemyAttack : MonoBehaviour{
 
     private void Awake() {
         movement = GetComponent<MeleeEnemyMovement>();
-        player = movement.GetPlayer();
+        player = movement.player;
     }
 
     private void Update() {
@@ -34,7 +34,7 @@ public class MeleeEnemyAttack : MonoBehaviour{
 
         // When timer is greater than timeBetweenAttacks and player is in range
         // attack player
-        if (timer >= timeBetweenAttacks && movement.GetPlayerInRange()) {
+        if (timer >= _timeBetweenAttacks && movement.playerInRange) {
             Attack();
         }
     }
@@ -44,7 +44,7 @@ public class MeleeEnemyAttack : MonoBehaviour{
 
         Debug.Log(this.name + " tries to hit player");
 
-        if (Random.Range(0f, 100f) <= hitChange) DamagePlayer();
+        if (Random.Range(0f, 100f) <= _hitChange) DamagePlayer();
     }
 
     private void DamagePlayer() {

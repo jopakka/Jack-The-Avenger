@@ -8,57 +8,57 @@ public class EnemyShooting : MonoBehaviour {
     #region Gun variables
 
     [SerializeField]
-    int clipSize = 30;
+    int _clipSize = 30;
     [SerializeField]
-    float timeBetweenShots = 0.2f;
+    float _timeBetweenShots = 0.2f;
     [SerializeField]
-    float reloadTime = 3f;
+    float _reloadTime = 3f;
     [SerializeField]
-    int damage = 3;
+    int _damage = 3;
     [SerializeField]
     [Range(0f, 100f)]
-    float hitChange = 65f;
-    float shootTimer = 0f;
-    int ammo;
+    float _hitChange = 65f;
+    float _shootTimer = 0f;
+    int _ammo;
 
     #endregion
 
-    EnemyMovement movement;
+    EnemyMovement _movement;
 
     private void Start() {
-        movement = GetComponent<EnemyMovement>();
-        ammo = clipSize;
+        _movement = GetComponent<EnemyMovement>();
+        _ammo = _clipSize;
     }
 
     private void Update() {
-        shootTimer += Time.deltaTime;
+        _shootTimer += Time.deltaTime;
 
         // When enemy has ammo and timer is greater than timeBetweenShots
         // and player is in range, shoot towards player
-        if (ammo > 0 && shootTimer >= timeBetweenShots && movement.GetPlayerInRange()) {
+        if (_ammo > 0 && _shootTimer >= _timeBetweenShots && _movement.playerInRange) {
             Shoot();
         }
 
         // When ammo has reach 0 and timer is greater than reloadTime
         // set enemy ammo to match clipSize
-        if (ammo <= 0 && shootTimer >= reloadTime) {
-            ammo = clipSize;
+        if (_ammo <= 0 && _shootTimer >= _reloadTime) {
+            _ammo = _clipSize;
         }
     }
 
     // Shoot toward player
     private void Shoot() {
-        shootTimer = 0f;
-        ammo--;
+        _shootTimer = 0f;
+        _ammo--;
         Debug.Log(this.name + " shoots");
 
         // When hitChange is greater than random, damage player
-        if (Random.Range(0f, 100f) <= hitChange) {
+        if (Random.Range(0f, 100f) <= _hitChange) {
             DamagePlayer();
         }
 
         // When ammo has reach 0 reload gun
-        if (ammo <= 0) Debug.Log(this.name + " reloads gun");
+        if (_ammo <= 0) Debug.Log(this.name + " reloads gun");
     }
 
     // Damage player

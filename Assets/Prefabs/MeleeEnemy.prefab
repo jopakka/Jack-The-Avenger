@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 602768827}
   - component: {fileID: 3338179896313929599}
   - component: {fileID: 2606202327518962139}
+  - component: {fileID: 7554207369592159630}
   m_Layer: 9
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -267,3 +268,15 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   attackDamage: 10
   hitChange: 90
+--- !u!114 &7554207369592159630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4655554590747821507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6e4179975317441ad76bd8234d137e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

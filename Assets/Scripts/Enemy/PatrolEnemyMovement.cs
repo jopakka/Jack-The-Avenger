@@ -9,11 +9,11 @@ public class PatrolEnemyMovement : EnemyMovement {
 
     [Header("Player Detector")]
     [SerializeField]
-    float detectorRange = 5f;
+    float _detectorRange = 5f;
     [SerializeField]
     [Range(0f, 360f)]
-    float fieldOfView = 40f;
-    GameObject detector;
+    float _fieldOfView = 40f;
+    GameObject _detector;
 
     #endregion
 
@@ -21,82 +21,82 @@ public class PatrolEnemyMovement : EnemyMovement {
 
     [Header("Patrol")]
     [SerializeField]
-    bool enablePatrol;
+    bool _enablePatrol;
     [SerializeField]
-    bool travelBack;
+    bool _travelBack;
     [SerializeField]
-    List<Waypoint> waypoints;
-    int currentWaypointIndex;
-    bool isTravelingBack;
+    List<Waypoint> _waypoints;
+    int _currentWaypointIndex;
+    bool _isTravelingBack;
 
     #endregion
 
     protected override void Start() {
         base.Start();
-        detector = transform.Find("Detector").gameObject;
-        detector.GetComponent<SphereCollider>().radius = detectorRange;
-        detector.GetComponent<EnemyDetector>().SetFieldOfView(fieldOfView);
+        _detector = transform.Find("Detector").gameObject;
+        _detector.GetComponent<SphereCollider>().radius = _detectorRange;
+        _detector.GetComponent<EnemyDetector>().fieldOfView = _fieldOfView;
     }
 
     private void Update() {
         // Enemy has seen player and goes to last known location
-        if (base.GetFindPlayer()) {
+        if (base.findPlayer) {
             base.GoToPlayersLastKnowLocation();
 
             // Enemy has reached players last known location and return back to normal route
-            if (base.GetNavMeshAgent().remainingDistance < 0.5f) {
-                base.SetFindPlayer(false);
+            if (base.navMeshAgent.remainingDistance < 0.5f) {
+                base.findPlayer = false;
                 base.GoToOldDestination();
             }
 
         // If enemy partol is On and has waypoits set, then enemy follows the route
-        } else if (enablePatrol && waypoints.Count != 0) {
-            base.GetNavMeshAgent().isStopped = false;
+        } else if (_enablePatrol && _waypoints.Count != 0) {
+            base.navMeshAgent.isStopped = false;
 
             // Enemy has reached current waypoints and sets destination to next waypoint
-            if (base.GetNavMeshAgent().remainingDistance <= 0.5f) {
-                base.GetNavMeshAgent().SetDestination(waypoints[currentWaypointIndex].transform.position);
+            if (base.navMeshAgent.remainingDistance <= 0.5f) {
+                base.navMeshAgent.SetDestination(_waypoints[_currentWaypointIndex].transform.position);
                 NextWaypoint();
             }
 
         // Enemy partol is disabled
         } else {
-            base.GetNavMeshAgent().isStopped = true;
+            base.navMeshAgent.isStopped = true;
         }
     }
 
     private void LateUpdate() {
         // Player is in enemy range and enemy start to look at player
-        if (base.GetPlayerInRange()) {
-            base.GetNavMeshAgent().isStopped = true;
+        if (base.playerInRange) {
+            base.navMeshAgent.isStopped = true;
             base.LookPlayer();
 
         // Enemy look forward when enemy is moving
         } else {
-            base.GetNavMeshAgent().isStopped = false;
-            if (base.GetNavMeshAgent().velocity.sqrMagnitude > Mathf.Epsilon) base.LookForward();
+            base.navMeshAgent.isStopped = false;
+            if (base.navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) base.LookForward();
         }
     }
 
     private void NextWaypoint() {
         // There is travel back mode On and more than 2 waypoints
-        if (travelBack && waypoints.Count > 2) {
-            if (isTravelingBack) {
+        if (_travelBack && _waypoints.Count > 2) {
+            if (_isTravelingBack) {
                 // Decrements currentWaypoinIndex then if it is 0 set travel back mode Off
-                if (--currentWaypointIndex == 0) isTravelingBack = false;
+                if (--_currentWaypointIndex == 0) _isTravelingBack = false;
 
             } else {
                 // Increments currentWaypointIndex then if it is equalt to waypoints Count
                 // then sets travel back mode On and decrements index by 2
-                if (++currentWaypointIndex == waypoints.Count) {
-                    currentWaypointIndex -= 2;
-                    isTravelingBack = true;
+                if (++_currentWaypointIndex == _waypoints.Count) {
+                    _currentWaypointIndex -= 2;
+                    _isTravelingBack = true;
                 }
             }
         } else {
             // Increments currentWaypointIndex then if it is equalt to waypoints Count
             // then sets index to 0
-            if (++currentWaypointIndex == waypoints.Count) currentWaypointIndex = 0;
+            if (++_currentWaypointIndex == _waypoints.Count) _currentWaypointIndex = 0;
         }
     }
 }
