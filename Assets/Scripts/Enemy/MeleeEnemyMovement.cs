@@ -6,30 +6,33 @@ using UnityEngine.AI;
 public class MeleeEnemyMovement : EnemyMovement {
 
     private void Update() {
-        base.destination = base.player.transform.position;
+        destination = player.transform.position;
     }
 
     private void LateUpdate() {
-        if (base.navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) {
-            base.LookForward();
+        animator.SetBool("isWalking", false);
+        if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) {
+            LookForward();
+            animator.SetBool("isWalking", true);
+        } else {
+            LookPlayer();
         }
     }
 
     private void OnTriggerStay(Collider other) {
         // When player enters trigger zone sets playerInRange to TRUE
         // and starts to look at player
-        if (other.gameObject == base.player) {
-            base.playerInRange = true;
-            base.navMeshAgent.isStopped = true;
-            base.LookPlayer();
+        if (other.gameObject == player) {
+            playerInSight = true;
+            navMeshAgent.isStopped = true;
         }
     }
 
     private void OnTriggerExit(Collider other) {
         // Player exit to trigger zone
-        if (other.gameObject == base.player) {
-            base.playerInRange = false;
-            base.navMeshAgent.isStopped = false;
+        if (other.gameObject == player) {
+            playerInSight = false;
+            navMeshAgent.isStopped = false;
         }
     }
 }

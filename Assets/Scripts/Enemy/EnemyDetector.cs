@@ -11,6 +11,7 @@ public class EnemyDetector : MonoBehaviour {
     float _fieldOfView;
     EnemyMovement _movement;
     SphereCollider _col;
+    RaycastHit _hit;
 
     #endregion
 
@@ -23,19 +24,17 @@ public class EnemyDetector : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
         if (other.gameObject == _player) {
-            _movement.playerInRange = false;
+            _movement.playerInSight = false;
 
+            Vector3 _startPos = _parent.transform.position + transform.up * 1.6f;
             Vector3 _direction = new Vector3(_player.transform.position.x - _parent.transform.position.x, 0f,
                 _player.transform.position.z - _parent.transform.position.z);
-            float angle = Vector3.Angle(_direction, _parent.transform.forward);
+            float _angle = Vector3.Angle(_direction, _parent.transform.forward);
 
-            if (Mathf.Abs(angle) <= _fieldOfView) {
-                RaycastHit _hit;
-                Debug.DrawRay(transform.position + transform.up * 0.6f, _direction.normalized * _col.radius);
-
-                if (Physics.Raycast(transform.position + transform.up * 0.6f, _direction.normalized, out _hit, _col.radius)) {
+            if (Mathf.Abs(_angle) <= _fieldOfView) {
+                if (Physics.Raycast(_startPos, _direction.normalized, out _hit, _col.radius)) {
                     if (_hit.collider.gameObject == _player) {
-                        _movement.playerInRange = true;
+                        _movement.playerInSight = true;
                     }
                 }
             }
@@ -44,7 +43,7 @@ public class EnemyDetector : MonoBehaviour {
 
     private void OnTriggerExit(Collider other) {
         if (other.gameObject == _player) {
-            _movement.playerInRange = false;
+            _movement.playerInSight = false;
         }
     }
 

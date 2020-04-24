@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PatrolEnemyMovement : EnemyMovement {
 
@@ -40,41 +39,43 @@ public class PatrolEnemyMovement : EnemyMovement {
 
     private void Update() {
         // Enemy has seen player and goes to last known location
-        if (base.findPlayer) {
-            base.GoToPlayersLastKnowLocation();
+        if (findPlayer && !playerInSight) {
+            GoToPlayersLastKnowLocation();
 
             // Enemy has reached players last known location and return back to normal route
-            if (base.navMeshAgent.remainingDistance < 0.5f) {
-                base.findPlayer = false;
-                base.GoToOldDestination();
+            if (navMeshAgent.remainingDistance < 0.5f) {
+                findPlayer = false;
+                GoToOldDestination();
             }
 
         // If enemy partol is On and has waypoits set, then enemy follows the route
         } else if (_enablePatrol && _waypoints.Count != 0) {
-            base.navMeshAgent.isStopped = false;
+            navMeshAgent.isStopped = false;
 
             // Enemy has reached current waypoints and sets destination to next waypoint
-            if (base.navMeshAgent.remainingDistance <= 0.5f) {
-                base.navMeshAgent.SetDestination(_waypoints[_currentWaypointIndex].transform.position);
+            if (navMeshAgent.remainingDistance <= 0.5f) {
+                navMeshAgent.SetDestination(_waypoints[_currentWaypointIndex].transform.position);
                 NextWaypoint();
             }
 
         // Enemy partol is disabled
         } else {
-            base.navMeshAgent.isStopped = true;
+            navMeshAgent.isStopped = true;
         }
     }
 
     private void LateUpdate() {
         // Player is in enemy range and enemy start to look at player
-        if (base.playerInRange) {
-            base.navMeshAgent.isStopped = true;
-            base.LookPlayer();
+        if (playerInSight) {
+            navMeshAgent.isStopped = true;
+            LookPlayer();
 
-        // Enemy look forward when enemy is moving
+            // Enemy look forward when enemy is moving
         } else {
-            base.navMeshAgent.isStopped = false;
-            if (base.navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) base.LookForward();
+            navMeshAgent.isStopped = false;
+            if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) {
+                LookForward();
+            }
         }
     }
 

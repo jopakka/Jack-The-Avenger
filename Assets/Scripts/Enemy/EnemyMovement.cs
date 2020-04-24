@@ -9,11 +9,12 @@ public class EnemyMovement : MonoBehaviour {
 
     GameObject _player;
     NavMeshAgent _nav;
-    bool _playerInRange;
+    bool _playerInSight;
     float _lookSpeed = 10f;
     Vector3 _playerLastKnownLocation;
     Vector3 _oldDestination;
     bool _findPlayer;
+    Animator _anim;
 
     #endregion
 
@@ -21,6 +22,14 @@ public class EnemyMovement : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player");
         _nav = GetComponent<NavMeshAgent>();
         _nav.updateRotation = false;
+        _anim = GetComponent<Animator>();
+    }
+
+    private void OnDrawGizmos() {
+        Vector3 startPos = transform.position + transform.up * 1.7f;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(startPos, transform.forward + startPos);
     }
 
     // Sets rotation to forward
@@ -36,15 +45,18 @@ public class EnemyMovement : MonoBehaviour {
         look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
         transform.rotation = Quaternion.Slerp(transform.rotation, look, _lookSpeed * Time.deltaTime);
         _playerLastKnownLocation = _player.transform.position;
-        if(!_findPlayer) _oldDestination = _nav.destination;
+        if (!_findPlayer) _oldDestination = _nav.destination;
         _findPlayer = true;
+    }
+
+    protected virtual void LookTo(Quaternion look) {
+        look = Quaternion.Euler(new Vector3(0f, look.eulerAngles.y, 0f));
+        transform.rotation = Quaternion.Slerp(transform.rotation, look, _lookSpeed * Time.deltaTime);
     }
 
     // Sets new destination to players last known location
     protected virtual void GoToPlayersLastKnowLocation() {
-        if(!_playerInRange && _findPlayer) {
-            destination = _playerLastKnownLocation;
-        }
+        destination = _playerLastKnownLocation;
     }
 
     // Sets destination back to where enemy left
@@ -55,9 +67,9 @@ public class EnemyMovement : MonoBehaviour {
 
     #region Getters Setters
 
-    public virtual bool playerInRange {
-        get { return _playerInRange; }
-        set { _playerInRange = value; }
+    public virtual bool playerInSight {
+        get { return _playerInSight; }
+        set { _playerInSight = value; }
     }
 
     public virtual GameObject player {
@@ -80,6 +92,10 @@ public class EnemyMovement : MonoBehaviour {
     public virtual Vector3 destination {
         get { return _nav.destination; }
         protected set { _nav.SetDestination(value); }
+    }
+
+    public virtual Animator animator {
+        get { return _anim; }
     }
 
     #endregion

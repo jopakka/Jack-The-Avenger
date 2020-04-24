@@ -18,36 +18,40 @@ public class MeleeEnemyAttack : MonoBehaviour{
 
     #region Misc variables
 
-    float timer;
-    MeleeEnemyMovement movement;
-    GameObject player;
+    float _timer;
+    MeleeEnemyMovement _movement;
+    GameObject _player;
+    Animator _anim;
 
     #endregion
 
     private void Awake() {
-        movement = GetComponent<MeleeEnemyMovement>();
-        player = movement.player;
+        _movement = GetComponent<MeleeEnemyMovement>();
+        _player = _movement.player;
+        _anim = GetComponent<Animator>();
     }
 
     private void Update() {
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
 
         // When timer is greater than timeBetweenAttacks and player is in range
         // attack player
-        if (timer >= _timeBetweenAttacks && movement.playerInRange) {
+        if (_timer >= _timeBetweenAttacks && _movement.playerInSight) {
             Attack();
         }
     }
 
     private void Attack() {
-        timer = 0f;
+        _timer = 0f;
 
-        Debug.Log(this.name + " tries to hit player");
+        //Debug.Log(this.name + " tries to hit player");
+
+        _anim.SetTrigger("Hit");
 
         if (Random.Range(0f, 100f) <= _hitChange) DamagePlayer();
     }
 
     private void DamagePlayer() {
-        Debug.Log(this.name + " harms the player");
+        //Debug.Log(this.name + " harms the player");
     }
 }
