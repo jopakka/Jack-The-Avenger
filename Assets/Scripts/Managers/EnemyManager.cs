@@ -14,6 +14,7 @@ public class EnemyManager : MonoBehaviour {
 
     //PlayerHealth playerHealth;
     int _spawnCounter = 0;
+    bool _stopped;
 
     private void Start() {
         //playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
@@ -21,7 +22,12 @@ public class EnemyManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (_spawnCounter >= _amount) CancelInvoke();
+        if (!_stopped) {
+            if (_spawnCounter >= _amount) {
+                CancelInvoke();
+                _stopped = true;
+            }
+        }
     }
 
     private void Spawn() {
