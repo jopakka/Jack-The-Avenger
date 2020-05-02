@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Head
   - Body
+  - Sound Controller
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Floor
   - Shootable
   - Player
-  - 
+  - Controller
   - 
   - 
   - 

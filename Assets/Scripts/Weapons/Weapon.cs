@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     Collider col;
     Rigidbody rigidBody;
     Animator animator;
+    SoundController sc;
     public enum WeaponType
     {
         Pistol, Rifle
@@ -79,20 +80,32 @@ public class Weapon : MonoBehaviour
     bool equipped;
     bool resettingCartridge;
 
+    [System.Serializable]
+    public class SoundSettings
+    {
+        public AudioClip[] gunshotSounds;
+        public AudioClip reloadSound;
+        [Range(0, 3)] public float pitchMin = 1;
+        [Range(0, 3)] public float pitchMax = 1.2f;
+        public AudioSource audioS;
+    }
+    [SerializeField]
+    public SoundSettings sounds;
+
     // Use this for initialization
     void Start()
     {
+        sc = GameObject.FindGameObjectWithTag("Sound Controller").GetComponent<SoundController>();
+        /*GameObject check = GameObject.FindGameObjectWithTag("Sound Controller");
+
+        if (check != null)
+        {
+            sc = GetComponent<SoundController>();
+        }unkommentoitu 30.4.*/
+
 		col = GetComponent<Collider>();
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        if(weaponSettings.crosshairPrefab != null)
-        {
-            weaponSettings.crosshairPrefab = Instantiate(weaponSettings.crosshairPrefab);
-            ToggleCrosshair(false);
-        }
-        
-
     }
 
     // Update is called once per frame
@@ -103,14 +116,7 @@ public class Weapon : MonoBehaviour
             if (equipped) {
                 if (owner.userSettings.rightHand) {
                     Equip();
-                    if(ownerAiming)
-                    {
-                        PositionCrosshair(aimRay);
-                    }
-                    else
-                    {
-                        ToggleCrosshair(false);
-                    }
+                    
                 }
             } else {
 				if (weaponSettings.bulletSpawn.childCount > 0) {
@@ -121,12 +127,10 @@ public class Weapon : MonoBehaviour
 					}
 				}
                 Unequip(weaponType);
-                ToggleCrosshair(false);
             }
-        } else { // If owner is null
+        } else { 
             DisableEnableComponents(true);
             transform.SetParent(null);
-            ownerAiming = false;
         }
     }
 
@@ -139,7 +143,7 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         Transform bSpawn = weaponSettings.bulletSpawn;
         Vector3 bSpawnPoint = bSpawn.position;
-		Vector3 dir = ray.GetPoint(weaponSettings.range) - bSpawnPoint;
+        Vector3 dir = ray.GetPoint(weaponSettings.range) - bSpawnPoint;
 
         dir += (Vector3)Random.insideUnitCircle * weaponSettings.bulletSpread;
 
@@ -210,38 +214,32 @@ public class Weapon : MonoBehaviour
 				Destroy(shell, Random.Range(15.0f, 20.0f));
 			}
 		}
-	}
+        PlayGunshotSound();
+        
+    }
 
-    void PositionCrosshair(Ray ray)
+    void PlayGunshotSound()
     {
-        RaycastHit hit;
-        Transform bSpawn = weaponSettings.bulletSpawn;
-        Vector3 bSpawnPoint = bSpawn.position;
-        Vector3 dir = ray.GetPoint(weaponSettings.range);
-
-        if (Physics.Raycast(bSpawnPoint, dir, out hit, weaponSettings.range, weaponSettings.bulletLayers))
+        if (sc == null)
         {
-            if (weaponSettings.crosshairPrefab != null)
+            return;
+        }
+
+        if (sounds.audioS != null)
+        {
+            if (sounds.gunshotSounds.Length > 0)
             {
-                ToggleCrosshair(true);
-                weaponSettings.crosshairPrefab.transform.position = hit.point;
-                weaponSettings.crosshairPrefab.transform.LookAt(Camera.main.transform);
+                sc.InstantiateClip(
+                    weaponSettings.bulletSpawn.position, // Where we want to play the sound from
+                    sounds.gunshotSounds[Random.Range(0, sounds.gunshotSounds.Length)],  // What audio clip we will use for this sound
+                    2, // How long before we destroy the audio
+                    true, // Do we want to randomize the sound?
+                    sounds.pitchMin, // The minimum pitch that the sound will use.
+                    sounds.pitchMax); // The maximum pitch that the sound will use.
             }
         }
-        else
-        {
-            ToggleCrosshair(false);
-        }
-
     }
 
-    void ToggleCrosshair(bool enabled)
-    {
-        if (weaponSettings.crosshairPrefab != null)
-        {
-            weaponSettings.crosshairPrefab.SetActive(enabled);
-        }
-    }
 
     //Disables or enables collider and rigidbody
     void DisableEnableComponents(bool enabled)

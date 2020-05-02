@@ -38,17 +38,17 @@ public class UserInput : MonoBehaviour
     public Transform spine;
     bool aiming;
 
-	//Dictionary <Weapon, GameObject> crosshairPrefabMap = new Dictionary<Weapon, GameObject>();
+	Dictionary <Weapon, GameObject> crosshairPrefabMap = new Dictionary<Weapon, GameObject>();
 
     // Use this for initialization
     void Start()
     {
         characterMove = GetComponent<CharacterMovement>();
         weaponHandler = GetComponent<WeaponHandler>();
-		//SetupCrosshairs ();
+		SetupCrosshairs ();
     }
 
-	/*void SetupCrosshairs () {
+	void SetupCrosshairs () {
 		if (weaponHandler.weaponsList.Count > 0) {
 			foreach (Weapon wep in weaponHandler.weaponsList) {
 				GameObject prefab = wep.weaponSettings.crosshairPrefab;
@@ -59,7 +59,7 @@ public class UserInput : MonoBehaviour
 				}
 			}
 		}
-	}*/
+	}
 
     // Update is called once per frame
     void Update()
@@ -111,19 +111,19 @@ public class UserInput : MonoBehaviour
 		}
     }
 
-    //Handles all weapon logic
-    void WeaponLogic()
-    {
-        if (!weaponHandler)
-            return;
+	//Handles all weapon logic
+	void WeaponLogic()
+	{
+		if (!weaponHandler)
+			return;
 
-		aiming = Input.GetButton (input.aimButton) || debugAim;
-		weaponHandler.Aim (aiming);
+		aiming = Input.GetButton(input.aimButton) || debugAim;
+		weaponHandler.Aim(aiming);
 
-		if (Input.GetButtonDown (input.switchWeaponButton)) {
-			weaponHandler.SwitchWeapons ();
-			//UpdateCrosshairs ();
-		}
+		if (Input.GetButtonDown(input.switchWeaponButton)) { 
+			weaponHandler.SwitchWeapons();
+		UpdateCrosshairs();// uncomment 25.4.
+	}
 		
 		if (weaponHandler.currentWeapon) {
 			
@@ -131,29 +131,31 @@ public class UserInput : MonoBehaviour
 
 			if (Input.GetButton (input.fireButton) && aiming)
 				weaponHandler.FireCurrentWeapon (aimRay);
-
+			
 			if (Input.GetButtonDown (input.reloadButton))
 				weaponHandler.Reload ();
 
-			if (Input.GetButtonDown (input.dropWeaponButton)) 
-				//DeleteCrosshair (weaponHandler.currentWeapon);
-				weaponHandler.DropCurWeapon ();
+			if (Input.GetButtonDown(input.dropWeaponButton)) { 
+				weaponHandler.DropCurWeapon();
+
+			//DeleteCrosshair (weaponHandler.currentWeapon);
+			//weaponHandler.DropCurWeapon ();
 			}
 
-			/*if (aiming) {
-				//ToggleCrosshair (true, weaponHandler.currentWeapon);
-				//PositionCrosshair (aimRay, weaponHandler.currentWeapon);
-			}
-			else
-				ToggleCrosshair (false, weaponHandler.currentWeapon);
-		} else
-			TurnOffAllCrosshairs ();*/
-    }
+			if (aiming) { //uncomment 25.4.
+				ToggleCrosshair (true, weaponHandler.currentWeapon);//uncomment 25.4.
+				PositionCrosshair (aimRay, weaponHandler.currentWeapon);//uncomment 25.4.
+			}//uncomment 25.4.
+			else//uncomment 25.4.
+			ToggleCrosshair (false, weaponHandler.currentWeapon);//uncomment 25.4.
+			} else//uncomment 25.4.
+			TurnOffAllCrosshairs ();//uncomment 25.4.
+}
 
-	/*void TurnOffAllCrosshairs () {
-		foreach (Weapon wep in crosshairPrefabMap.Keys) {
-			ToggleCrosshair (false, wep);
-		}
+	void TurnOffAllCrosshairs () { //uncomment 25.4.
+		foreach (Weapon wep in crosshairPrefabMap.Keys) { //uncomment 25.4.
+			ToggleCrosshair (false, wep); //uncomment 25.4.
+	}
 	}
 
 	void CreateCrosshair (Weapon wep) {
@@ -217,7 +219,7 @@ public class UserInput : MonoBehaviour
 				ToggleCrosshair (false, wep);
 			}
 		}
-	}*/
+	}
 
     //Postions the spine when aiming
     void PositionSpine()

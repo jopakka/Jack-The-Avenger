@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class WeaponHandler : MonoBehaviour
 {
     Animator animator;
+    SoundController sc;
 
     [System.Serializable]
     public class UserSettings
@@ -25,7 +26,6 @@ public class WeaponHandler : MonoBehaviour
     }
     [SerializeField]
     public Animations animations;
-
     public Weapon currentWeapon;
     public List<Weapon> weaponsList = new List<Weapon>();
     public int maxWeapons = 2;
@@ -35,28 +35,31 @@ public class WeaponHandler : MonoBehaviour
     bool settingWeapon;
 
     // Use this for initialization
-    /*void OnEnable()
+    void OnEnable()//päälle 25.4.
     {
+        GameObject check = GameObject.FindGameObjectWithTag("Sound Controller");
+        if (check != null)
+            sc = check.GetComponent<SoundController>();
         animator = GetComponent<Animator>();
 		SetupWeapons ();
-    }*/
+    }//päälle 25.4.
 
 	void SetupWeapons () {
-		if (currentWeapon)
-		{
-			currentWeapon.SetEquipped(true);
-			currentWeapon.SetOwner(this);
-			AddWeaponToList(currentWeapon);
-            currentWeapon.ownerAiming = aim; //lisäys crosshair
+        if (currentWeapon)
+        {
+            currentWeapon.SetEquipped(true);
+            currentWeapon.SetOwner(this);
+            AddWeaponToList(currentWeapon);
+            //currentWeapon.ownerAiming = aim; poistettu 25.4.
 
-			if (currentWeapon.ammo.clipAmmo <= 0)
-				Reload();
+            if (currentWeapon.ammo.clipAmmo <= 0)
+                Reload();
 
-			if (reload)
-			if (settingWeapon)
-				reload = false;
-		}
-
+            if (reload)
+            if (settingWeapon)
+                reload = false;
+            
+        }
 		if(weaponsList.Count > 0)
 		{
 			for(int i = 0; i < weaponsList.Count; i++)
@@ -71,15 +74,22 @@ public class WeaponHandler : MonoBehaviour
 	}
 
 
-    void Start()
+    /*void Start()
     {
+        GameObject check = GameObject.FindGameObjectWithTag("Sound Controller");
+
+        if (check != null)
+        {
+            sc = GetComponent<SoundController>();
+        }
+
         animator = GetComponent<Animator>();   
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
-        SetupWeapons();//testaus
+        //SetupWeapons(); pois 25.4.
         Animate();
     }
 
@@ -138,6 +148,18 @@ public class WeaponHandler : MonoBehaviour
 
         if (currentWeapon.ammo.carryingAmmo <= 0 || currentWeapon.ammo.clipAmmo == currentWeapon.ammo.maxClipAmmo)
             return;
+
+        if (sc != null)
+        {
+
+            if (currentWeapon.sounds.reloadSound != null)
+            {
+                if (currentWeapon.sounds.audioS != null)
+                {
+                    sc.PlaySound(currentWeapon.sounds.audioS, currentWeapon.sounds.reloadSound, true, currentWeapon.sounds.pitchMin, currentWeapon.sounds.pitchMax);
+                }
+            }
+        }
 
         reload = true;
         StartCoroutine(StopReload());

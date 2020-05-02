@@ -69,6 +69,7 @@ public class CharacterMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
     }
 
