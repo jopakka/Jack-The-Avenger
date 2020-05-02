@@ -184,6 +184,16 @@ public class Weapon : MonoBehaviour
 				Destroy(decal, Random.Range(15.0f, 20.0f));
 			}
 		}
+
+        EnemyHealth enemyHealth = hit.collider.GetComponent<EnemyHealth>();
+        if(enemyHealth != null) {
+            Debug.Log("HIT ENEMY");
+            if (weaponType == WeaponType.Rifle) {
+                enemyHealth.TakeDamage(30);
+            } else if(weaponType == WeaponType.Pistol) {
+                enemyHealth.TakeDamage(40);
+            }
+        }
 	}
 
 	void GunEffects()

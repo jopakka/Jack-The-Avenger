@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyHealth : MonoBehaviour{
+public class EnemyHealth : MonoBehaviour {
 
     #region Variables
 
@@ -52,7 +52,7 @@ public class EnemyHealth : MonoBehaviour{
         _rb.isKinematic = true;
         _movement.enabled = false;
         _navMeshAgent.enabled = false;
-        _shooting.enabled = false;
+        if (_shooting != null) _shooting.enabled = false;
         _anim.SetTrigger("Die");
     }
 
