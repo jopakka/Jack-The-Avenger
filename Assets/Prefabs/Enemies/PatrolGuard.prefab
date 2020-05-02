@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 3275527664301939208}
   m_LocalRotation: {x: 0, y: 1, z: -0, w: -0.0000001872535}
   m_LocalPosition: {x: 2.661408, y: 0, z: 1.260453}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3275527664301574066}
   - {fileID: 3275527664301574064}
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55fcbd3f95e11c4bb0dfa5174f465f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectorRange: 5
+  _detectorRange: 10
   _fieldOfView: 110
   _enablePatrol: 1
   _travelBack: 0
@@ -380,7 +380,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 3
+  m_Speed: 9
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -3128,7 +3128,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3885364568346278273
 MonoBehaviour:
