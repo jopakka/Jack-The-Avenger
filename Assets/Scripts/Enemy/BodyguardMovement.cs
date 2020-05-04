@@ -59,14 +59,6 @@ public class BodyguardMovement : EnemyMovement {
         }
     }
 
-    private void OnGUI() {
-        string text = "*Bodyguard*";
-        text += "\nremDis: " + navMeshAgent.remainingDistance;
-        text += "\nplayerInSight: " + playerInSight;
-        text += "\nfindPlayer: " + findPlayer;
-        GUI.Box(new Rect(10, 10, 150, 100), text);
-    }
-
     private void SetWalkState() {
         if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon) {
             animator.SetBool("IsWalking", true);
