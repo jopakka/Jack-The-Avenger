@@ -8,7 +8,7 @@ using System.Runtime.Remoting.Messaging;
 public class PlayerHealth : MonoBehaviour {
     public int startingHealth = 100;
     public int currentHealth;
-    //public Slider healthSlider;
+    public Slider healthSlider;
 
     Animator anim;
     CharacterMovement playerMovement;
@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour {
     public void TakeDamage(int amount) {
         damaged = true;
         currentHealth -= amount;
-        //healthSlider.value = currentHealth;
+        healthSlider.value = currentHealth;
 
         if (currentHealth <= 0 && !isDead) {
             Death();
