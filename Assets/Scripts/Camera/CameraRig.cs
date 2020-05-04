@@ -145,7 +145,7 @@ public class CameraRig : MonoBehaviour
             return;
 
         newX += cameraSettings.mouseXSensitivity * Input.GetAxis(input.verticalAxis);
-        newY += cameraSettings.mouseYSensitivity * Input.GetAxis(input.horizontalAxis);
+        newY -= cameraSettings.mouseYSensitivity * Input.GetAxis(input.horizontalAxis);
 
         Vector3 eulerAngleAxis = new Vector3();
         eulerAngleAxis.x = newY;
