@@ -111,7 +111,9 @@ public class EnemyShooting : MonoBehaviour {
     }
 
     // Damage player
-    private void DamagePlayer() {
+    private void DamagePlayer()
+    {
         //Debug.Log(this.name + " hits player");
+        
     }
 }
