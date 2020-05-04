@@ -1972,7 +1972,7 @@ GameObject:
   - component: {fileID: 4312271354593346190}
   m_Layer: 9
   m_Name: fatjoe
-  m_TagString: Untagged
+  m_TagString: FatSam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

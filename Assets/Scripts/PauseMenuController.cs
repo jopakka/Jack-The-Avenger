@@ -8,6 +8,8 @@ public class PauseMenuController : MonoBehaviour {
     GameObject pauseMenu;
     [SerializeField]
     GameObject gameOverMenu;
+    [SerializeField]
+    GameObject wonMenu;
     //PlayerHealth playerHealth;
 
     // Start is called before the first frame update
@@ -24,6 +26,13 @@ public class PauseMenuController : MonoBehaviour {
             Time.timeScale = 0f;
             return;
         }*/
+
+        if(GameObject.FindGameObjectsWithTag("FatSam").Length <= 0) {
+            wonMenu.SetActive(true);
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             TogglePause();
