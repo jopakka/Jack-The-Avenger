@@ -10,22 +10,22 @@ public class PauseMenuController : MonoBehaviour {
     GameObject gameOverMenu;
     [SerializeField]
     GameObject wonMenu;
-    //PlayerHealth playerHealth;
+    PlayerHealth playerHealth;
 
     // Start is called before the first frame update
     void Start() {
-        //playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update() {
-        /*if(playerHealth.currentHealth <= 0) {
+        if(playerHealth.IsDead) {
             gameOverMenu.SetActive(true);
             Cursor.visible = true;
             Time.timeScale = 0f;
             return;
-        }*/
+        }
 
         if(GameObject.FindGameObjectsWithTag("FatSam").Length <= 0) {
             wonMenu.SetActive(true);
@@ -51,6 +51,7 @@ public class PauseMenuController : MonoBehaviour {
     }
 
     public void ReloadScene() {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

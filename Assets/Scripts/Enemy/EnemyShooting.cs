@@ -113,5 +113,7 @@ public class EnemyShooting : MonoBehaviour {
     // Damage player
     private void DamagePlayer() {
         //Debug.Log(this.name + " hits player");
+        PlayerHealth ph = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        ph.TakeDamage(_damage);
     }
 }
