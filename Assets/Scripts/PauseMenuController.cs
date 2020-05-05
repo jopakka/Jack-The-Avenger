@@ -11,15 +11,13 @@ public class PauseMenuController : MonoBehaviour {
     GameObject gameOverMenu;
     [SerializeField]
     GameObject wonMenu;
-    PlayerHealth playerHealth;
     bool over;
 
     // Start is called before the first frame update
     void Start() {
         Time.timeScale = 1f;
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -44,6 +42,12 @@ public class PauseMenuController : MonoBehaviour {
     }
 
     public void TogglePause() {
+        if (Cursor.lockState == CursorLockMode.Locked) {
+            Cursor.lockState = CursorLockMode.None;
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         Cursor.visible = !Cursor.visible;
         Time.timeScale = 1f - Time.timeScale;
