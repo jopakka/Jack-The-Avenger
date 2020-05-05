@@ -7,6 +7,7 @@ TagManager:
   - Head
   - Body
   - Sound Controller
+  - FatSam
   layers:
   - Default
   - TransparentFX
