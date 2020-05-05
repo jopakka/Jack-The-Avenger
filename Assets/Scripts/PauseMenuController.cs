@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,8 +15,10 @@ public class PauseMenuController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        Time.timeScale = 1f;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     // Update is called once per frame
@@ -26,6 +29,8 @@ public class PauseMenuController : MonoBehaviour {
             Time.timeScale = 0f;
             return;
         }
+
+        Debug.Log(GameObject.FindGameObjectsWithTag("FatSam").Length);
 
         if(GameObject.FindGameObjectsWithTag("FatSam").Length <= 0) {
             wonMenu.SetActive(true);
@@ -51,7 +56,6 @@ public class PauseMenuController : MonoBehaviour {
     }
 
     public void ReloadScene() {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

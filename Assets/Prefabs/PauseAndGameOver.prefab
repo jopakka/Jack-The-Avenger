@@ -766,12 +766,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -820,7 +820,7 @@ RectTransform:
   m_GameObject: {fileID: 5869485224053025803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.67548996, y: 0.67548996, z: 0.67548996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6406471111116273567}
   m_RootOrder: 0
@@ -828,7 +828,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 249.33044, y: 202.73108}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7497202984153114266
 CanvasRenderer:
@@ -1177,7 +1177,7 @@ RectTransform:
   m_GameObject: {fileID: 7355778255218241843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.67548996, y: 0.67548996, z: 0.67548996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3303889045354665122}
   m_RootOrder: 0
@@ -1185,7 +1185,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 249.33044, y: 202.73108}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6651808613661823203
 CanvasRenderer:
@@ -1298,12 +1298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 8008959011069239885}
   - component: {fileID: 8008959011069239886}
   - component: {fileID: 8008959011069239884}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1508,7 +1508,7 @@ GameObject:
   - component: {fileID: 8008959011455409473}
   - component: {fileID: 8008959011455409472}
   - component: {fileID: 8008959011455409474}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1637,7 +1637,7 @@ GameObject:
   - component: {fileID: 8008959011514054296}
   m_Layer: 0
   m_Name: PauseAndGameOver
-  m_TagString: FatSam
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 8008959012074379580}
   - component: {fileID: 8008959012074379581}
   - component: {fileID: 8008959012074379582}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 8008959012084920460}
   - component: {fileID: 8008959012084920450}
   - component: {fileID: 8008959012084920451}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PauseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1944,7 +1944,7 @@ GameObject:
   - component: {fileID: 8008959012202117360}
   - component: {fileID: 8008959012202117361}
   - component: {fileID: 8008959012202117362}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2114,7 +2114,7 @@ GameObject:
   - component: {fileID: 8008959012600915019}
   - component: {fileID: 8008959012600915017}
   - component: {fileID: 8008959012600915018}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2188,7 +2188,7 @@ GameObject:
   - component: {fileID: 8008959012853327977}
   - component: {fileID: 8008959012853327976}
   - component: {fileID: 8008959012853327978}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
