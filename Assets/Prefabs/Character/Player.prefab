@@ -2315,7 +2315,7 @@ MonoBehaviour:
     requireInputForTurn: 1
     aimDetectionLayers:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 0
   TPSCamera: {fileID: 0}
   debugAim: 0
   spine: {fileID: 6354739348615414826}

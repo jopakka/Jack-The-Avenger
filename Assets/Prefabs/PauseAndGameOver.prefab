@@ -1637,7 +1637,7 @@ GameObject:
   - component: {fileID: 8008959011514054296}
   m_Layer: 0
   m_Name: PauseAndGameOver
-  m_TagString: Untagged
+  m_TagString: FatSam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
