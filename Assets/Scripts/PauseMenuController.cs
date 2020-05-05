@@ -30,8 +30,6 @@ public class PauseMenuController : MonoBehaviour {
             return;
         }
 
-        Debug.Log(GameObject.FindGameObjectsWithTag("FatSam").Length);
-
         if(GameObject.FindGameObjectsWithTag("FatSam").Length <= 0) {
             wonMenu.SetActive(true);
             Cursor.visible = true;
