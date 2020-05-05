@@ -37,7 +37,9 @@ public class PatrolEnemyMovement : EnemyMovement {
         _detector.GetComponent<EnemyDetector>().fieldOfView = _fieldOfView;
     }
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
+
         // Enemy has seen player and goes to last known location
         if (findPlayer && !playerInSight) {
             GoToPlayersLastKnowLocation();

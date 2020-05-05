@@ -33,7 +33,9 @@ public class BodyguardMovement : EnemyMovement {
         _detector.GetComponent<EnemyDetector>().fieldOfView = _fieldOfView;
     }
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
+
         SetWalkState();
 
         // Player is in enemy range and enemy start to look at player

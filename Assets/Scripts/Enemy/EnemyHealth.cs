@@ -52,7 +52,10 @@ public class EnemyHealth : MonoBehaviour {
         _rb.isKinematic = true;
         _movement.enabled = false;
         _navMeshAgent.enabled = false;
-        if (_shooting != null) _shooting.enabled = false;
+        if (_shooting != null) {
+            _shooting.DisableEffects();
+            _shooting.enabled = false;
+        }
         _anim.SetTrigger("Die");
     }
 

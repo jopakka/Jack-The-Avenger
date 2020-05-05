@@ -12,6 +12,7 @@ public class PauseMenuController : MonoBehaviour {
     [SerializeField]
     GameObject wonMenu;
     PlayerHealth playerHealth;
+    bool over;
 
     // Start is called before the first frame update
     void Start() {
@@ -23,10 +24,10 @@ public class PauseMenuController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(playerHealth.IsDead) {
-            gameOverMenu.SetActive(true);
-            Cursor.visible = true;
-            Time.timeScale = 0f;
+        if (over) return;
+
+        if(PlayerHealth.IsDead) {
+            StartCoroutine(WaitBeforeEnd());
             return;
         }
 
@@ -54,6 +55,15 @@ public class PauseMenuController : MonoBehaviour {
     }
 
     public void ReloadScene() {
+        PlayerHealth.IsDead = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    IEnumerator WaitBeforeEnd() {
+        yield return new WaitForSeconds(2);
+        gameOverMenu.SetActive(true);
+        Cursor.visible = true;
+        Time.timeScale = 0f;
+        over = true;
     }
 }

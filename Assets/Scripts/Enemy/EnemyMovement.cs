@@ -25,6 +25,10 @@ public class EnemyMovement : MonoBehaviour {
         _anim = GetComponent<Animator>();
     }
 
+    protected virtual void Update() {
+        if (PlayerHealth.IsDead) return;
+    }
+
     private void OnDrawGizmos() {
         Vector3 startPos = transform.position + transform.up * 1.7f;
 
