@@ -2486,6 +2486,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd8c166ca282a3640b499c4e41a0d9ee, type: 3}
+--- !u!4 &116758997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6354739348615396988, guid: 758de04610ace094a841c35e25142f7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6354739349218759222}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &118922467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5253,7 +5259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 5966034842114760955, guid: 527c35b53d1b85d4caf459109184bf1c, type: 3}
-  _amount: 5
+  _amount: 3
   _spawnRate: 3
   _spawnPoints:
   - {fileID: 280419067}
@@ -12886,7 +12892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 5966034842114760955, guid: 527c35b53d1b85d4caf459109184bf1c, type: 3}
-  _amount: 5
+  _amount: 3
   _spawnRate: 3
   _spawnPoints:
   - {fileID: 729050983}
@@ -19030,7 +19036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 5966034842114760955, guid: 527c35b53d1b85d4caf459109184bf1c, type: 3}
-  _amount: 5
+  _amount: 3
   _spawnRate: 3
   _spawnPoints:
   - {fileID: 1036215014}
@@ -24002,6 +24008,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: SpawnTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 8466983930392739929, guid: aa20547dfc1c8104e9a4bb855c15ca97,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.867
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466983930392739929, guid: aa20547dfc1c8104e9a4bb855c15ca97,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.904279
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa20547dfc1c8104e9a4bb855c15ca97, type: 3}
 --- !u!1001 &1272467800
@@ -26207,7 +26223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 5966034842114760955, guid: 527c35b53d1b85d4caf459109184bf1c, type: 3}
-  _amount: 5
+  _amount: 3
   _spawnRate: 3
   _spawnPoints:
   - {fileID: 1367998154}
@@ -41155,6 +41171,21 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
+      objectReference: {fileID: 116758997}
+    - target: {fileID: 6592279856494140184, guid: b7d575416a1131c48baf4fdb705e8f41,
+        type: 3}
+      propertyPath: movement.movementLerpSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592279856494140184, guid: b7d575416a1131c48baf4fdb705e8f41,
+        type: 3}
+      propertyPath: shoulder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592279856494140184, guid: b7d575416a1131c48baf4fdb705e8f41,
+        type: 3}
+      propertyPath: cameraSettings.zoomSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6592279856504056090, guid: b7d575416a1131c48baf4fdb705e8f41,
         type: 3}
