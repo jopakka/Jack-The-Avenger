@@ -8,6 +8,7 @@ TagManager:
   - Body
   - Sound Controller
   - FatSam
+  - SpawnTrigger
   layers:
   - Default
   - TransparentFX

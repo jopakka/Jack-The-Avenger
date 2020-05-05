@@ -413,7 +413,7 @@ MonoBehaviour:
   _reloadTime: 2
   _damage: 5
   _hitChange: 70
-  _range: 100
+  _range: 200
 --- !u!195 &7947981521873222809
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feede7b7aae0b4b4482248b1b3c7e916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectorRange: 10
+  _detectorRange: 20
   _fieldOfView: 110
 --- !u!1 &630830024575189710
 GameObject:
