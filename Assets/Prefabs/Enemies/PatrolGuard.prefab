@@ -347,7 +347,7 @@ MonoBehaviour:
   _timeBetweenShots: 0.2
   _reloadTime: 3
   _damage: 3
-  _hitChange: 65
+  _hitChange: 40
   _range: 200
 --- !u!114 &3275527663526794922
 MonoBehaviour:
