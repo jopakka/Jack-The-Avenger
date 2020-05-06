@@ -69,5 +69,6 @@ public class PauseMenuController : MonoBehaviour {
         Cursor.visible = true;
         Time.timeScale = 0f;
         over = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
