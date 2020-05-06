@@ -26,7 +26,7 @@ public class EnemyDetector : MonoBehaviour {
         if (other.gameObject == _player) {
             _movement.playerInSight = false;
 
-            Vector3 _startPos = _parent.transform.position + transform.up * 1.6f;
+            Vector3 _startPos = _parent.transform.position + transform.up * 4f;
             Vector3 _direction = new Vector3(_player.transform.position.x - _parent.transform.position.x, 0f,
                 _player.transform.position.z - _parent.transform.position.z);
             float _angle = Vector3.Angle(_direction, _parent.transform.forward);
