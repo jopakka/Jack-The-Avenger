@@ -48,6 +48,8 @@ public class EnemyShooting : MonoBehaviour {
     }
 
     private void Update() {
+        if (PlayerHealth.IsDead) return;
+
         _shootTimer += Time.deltaTime;
 
         // When enemy has ammo and timer is greater than timeBetweenShots
@@ -68,7 +70,7 @@ public class EnemyShooting : MonoBehaviour {
         }
     }
 
-    private void DisableEffects() {
+    public void DisableEffects() {
         _gunLine.enabled = false;
     }
 

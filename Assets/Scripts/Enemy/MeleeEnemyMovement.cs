@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class MeleeEnemyMovement : EnemyMovement {
 
-    private void Update() {
+    protected override void Update() {
+        base.Update();
         destination = player.transform.position;
     }
 

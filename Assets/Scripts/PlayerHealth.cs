@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-using System.Runtime.Remoting.Messaging;
 
 public class PlayerHealth : MonoBehaviour {
     public int startingHealth = 100;
@@ -12,14 +11,14 @@ public class PlayerHealth : MonoBehaviour {
 
     Animator anim;
     CharacterMovement playerMovement;
-    Weapon playerShooting;
-    bool isDead;
+    //Weapon playerShooting;
+    static bool isDead;
     bool damaged;
 
     void Start() {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<CharacterMovement>();
-        playerShooting = GetComponentInChildren<Weapon>();
+        //playerShooting = GetComponentInChildren<Weapon>();
         currentHealth = startingHealth;
     }
     void Update() {
@@ -37,14 +36,21 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     void Death() {
-        isDead = true;
-        //anim.SetTrigger("Die");
+        anim.SetTrigger("Die");
 
-        //playerMovement.enabled = false;
+        playerMovement.enabled = false;
         //playerShooting.enabled = false;
+
+        isDead = true;
     }
 
-    public bool IsDead {
+    public void StartSinking() {
+        // Do not remove
+        // This prevents errors xD
+    }
+
+    public static bool IsDead {
         get => isDead;
+        set => isDead = value;
     }
 }

@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour {
 
 				if (playerUI.healthBar && playerUI.healthText) 
 				{
-					playerUI.healthText.text = Mathf.Round(playerUI.healthBar.value).ToString();
+					playerUI.healthText.text = Mathf.Round(playerUI.healthBar.value).ToString() + "/100";
 				}
 			}
 		}
