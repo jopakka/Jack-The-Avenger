@@ -411,7 +411,7 @@ MonoBehaviour:
   _clipSize: 8
   _timeBetweenShots: 0.7
   _reloadTime: 2
-  _damage: 5
+  _damage: 1
   _hitChange: 40
   _range: 200
 --- !u!195 &7947981521873222809
