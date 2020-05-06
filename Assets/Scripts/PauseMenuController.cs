@@ -33,6 +33,7 @@ public class PauseMenuController : MonoBehaviour {
             wonMenu.SetActive(true);
             Cursor.visible = true;
             Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
             return;
         }
 
