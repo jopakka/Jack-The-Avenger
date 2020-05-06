@@ -2286,8 +2286,8 @@ MonoBehaviour:
       m_Bits: 1
     airSpeed: 2.5
   movement:
-    jumpSpeed: 6
-    jumpTime: 0.25
+    jumpSpeed: 7
+    jumpTime: 0.3
 --- !u!114 &6354739348621213964
 MonoBehaviour:
   m_ObjectHideFlags: 0
