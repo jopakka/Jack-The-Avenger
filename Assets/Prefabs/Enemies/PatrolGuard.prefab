@@ -361,8 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55fcbd3f95e11c4bb0dfa5174f465f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectorRange: 15
-  _fieldOfView: 110
+  _detectorRange: 60
+  _fieldOfView: 180
   _enablePatrol: 1
   _travelBack: 0
   _waypoints:
