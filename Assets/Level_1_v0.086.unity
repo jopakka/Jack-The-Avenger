@@ -41382,7 +41382,7 @@ PrefabInstance:
     - target: {fileID: 6354739348620439572, guid: 758de04610ace094a841c35e25142f7a,
         type: 3}
       propertyPath: m_StepOffset
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6354739348621197188, guid: 758de04610ace094a841c35e25142f7a,
         type: 3}
@@ -41700,6 +41700,11 @@ PrefabInstance:
       propertyPath: weaponSettings.range
       value: 1359.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8239984900777113245, guid: a2cc2bb42762ee945a468d86fa00ec6f,
+        type: 3}
+      propertyPath: weaponSettings.bulletSpread
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8239984900783726625, guid: a2cc2bb42762ee945a468d86fa00ec6f,
         type: 3}
       propertyPath: m_Name
@@ -41769,6 +41774,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8242408322064520044, guid: a42df0d8061c8f84ab8e423c30b90bda,
+        type: 3}
+      propertyPath: weaponSettings.bulletSpread
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8242408322071337374, guid: a42df0d8061c8f84ab8e423c30b90bda,
         type: 3}
       propertyPath: m_LocalPosition.x
