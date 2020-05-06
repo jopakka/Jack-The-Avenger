@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        Vector3 startPos = transform.position + transform.up * 1.7f;
+        Vector3 startPos = transform.position + transform.up * 5f;
 
         Gizmos.color = Color.red;
         Gizmos.DrawLine(startPos, transform.forward + startPos);
