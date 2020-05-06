@@ -2174,7 +2174,7 @@ MonoBehaviour:
   _timeBetweenShots: 0.2
   _reloadTime: 5
   _damage: 7
-  _hitChange: 60
+  _hitChange: 30
   _range: 300
 --- !u!195 &5474759613820945691
 NavMeshAgent:

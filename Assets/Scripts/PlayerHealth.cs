@@ -11,14 +11,16 @@ public class PlayerHealth : MonoBehaviour {
 
     Animator anim;
     CharacterMovement playerMovement;
-    //Weapon playerShooting;
+    [SerializeField]
+    Weapon weapon1;
+    [SerializeField]
+    Weapon weapon2;
     static bool isDead;
     bool damaged;
 
     void Start() {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<CharacterMovement>();
-        //playerShooting = GetComponentInChildren<Weapon>();
         currentHealth = startingHealth;
     }
     void Update() {
@@ -39,7 +41,10 @@ public class PlayerHealth : MonoBehaviour {
         anim.SetTrigger("Die");
 
         playerMovement.enabled = false;
-        //playerShooting.enabled = false;
+        if(weapon1 != null) weapon1.GetComponent<Weapon>().enabled = false;
+        if(weapon2 != null) weapon2.GetComponent<Weapon>().enabled = false;
+        GetComponent<WeaponHandler>().enabled = false;
+        GetComponent<UserInput>().enabled = false;
 
         isDead = true;
     }
