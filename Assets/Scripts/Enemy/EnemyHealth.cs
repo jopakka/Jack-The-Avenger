@@ -18,6 +18,7 @@ public class EnemyHealth : MonoBehaviour {
     Rigidbody _rb;
     Animator _anim;
     EnemyShooting _shooting;
+    MeleeEnemyAttack _meleeAttack;
     bool _isSinking;
 
     #endregion
@@ -30,6 +31,7 @@ public class EnemyHealth : MonoBehaviour {
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
         _shooting = GetComponent<EnemyShooting>();
+        _meleeAttack = GetComponent<MeleeEnemyAttack>();
     }
 
     private void Update() {
@@ -56,6 +58,11 @@ public class EnemyHealth : MonoBehaviour {
             _shooting.DisableEffects();
             _shooting.enabled = false;
         }
+
+        if(_meleeAttack != null) {
+            _meleeAttack.enabled = false;
+        }
+
         _anim.SetTrigger("Die");
     }
 
