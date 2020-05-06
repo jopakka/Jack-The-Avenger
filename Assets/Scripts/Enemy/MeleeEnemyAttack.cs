@@ -53,5 +53,6 @@ public class MeleeEnemyAttack : MonoBehaviour{
 
     private void DamagePlayer() {
         //Debug.Log(this.name + " harms the player");
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().TakeDamage(_attackDamage);
     }
 }
